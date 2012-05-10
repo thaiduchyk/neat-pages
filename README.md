@@ -1,8 +1,7 @@
-Neat Pages
+Neat Pages [![Build Status](https://secure.travis-ci.org/demarque/neat-pages.png?branch=master)](http://travis-ci.org/demarque/neat-pages)
 ===============
 
-[![Build Status](https://secure.travis-ci.org/demarque/neat-pages.png?branch=master)](http://travis-ci.org/demarque/neat-pages)
-
+A simple pagination API to paginate Mongoid Models or any other stuff...
 
 Install
 -------
