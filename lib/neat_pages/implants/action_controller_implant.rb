@@ -13,7 +13,7 @@ module NeatPages::Implants::ActionControllerImplant
     base_current_url = request.protocol + request.host + request.path_info
 
     neat_pages = NeatPages::Base.new(params[:page], options)
-    neat_pages.activate_helpers(base_current_url, request.env['rack.request.query_hash'])
+    neat_pages.activate_helpers(base_current_url, request.env['action_dispatch.request.query_parameters'])
 
     @_env['neat_pages'] = neat_pages
   end
