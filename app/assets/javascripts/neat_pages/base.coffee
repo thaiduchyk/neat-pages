@@ -2,13 +2,14 @@ class NeatPage
   constructor: () ->
     # AJAX pagination only for IE7 and up
     if navigator.appVersion.indexOf("MSIE 7.") == -1
-      @initPagination()
+      if $('#neat-pages-ajax-wrapper').length != 0
+        @initPagination()
 
-      $(window).hashchange () => @loadPage @getPageFromHash()
+        $(window).hashchange () => @loadPage @getPageFromHash()
 
-      $('#neat-pages-navigation li.next a').click (e) => @nextPage() ; return false
-      $('#neat-pages-navigation li.previous a').click (e) => @previousPage() ; return false
-      $('#neat-pages-navigation li.page a').click (e) => @thatPage $(e.target) ; return false
+        $('#neat-pages-navigation li.next a').click (e) => @nextPage() ; return false
+        $('#neat-pages-navigation li.previous a').click (e) => @previousPage() ; return false
+        $('#neat-pages-navigation li.page a').click (e) => @thatPage $(e.target) ; return false
 
 
 
