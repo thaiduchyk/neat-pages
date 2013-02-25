@@ -11,7 +11,7 @@ module NeatPages
     # CONSTRUCTOR
     #*************************************************************************************
     def initialize(current_page, options={})
-      options = { :per_page => 10, :total_items => 0 }.merge(options)
+      options = { per_page: 10, total_items: 0 }.merge(options)
 
       @per_page = options[:per_page].to_i
       @total_items = options[:total_items]
@@ -25,23 +25,9 @@ module NeatPages
     #*************************************************************************************
     # PUBLIC INSTANCE METHODS
     #*************************************************************************************
-    def activate_helpers(base_url='', params={})
-      @helpers = NeatPages::Helpers.new(self, base_url, params)
-    end
-
     def empty?
       @total_items == 0
     end
-
-    def helpers
-      if @helpers
-        @helpers
-      else
-        raise 'You must activate the helpers by calling "activate_helpers".'
-      end
-    end
-
-    alias_method :h, :helpers
 
     def limit
       @per_page

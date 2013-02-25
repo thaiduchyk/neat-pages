@@ -2,6 +2,7 @@ require "rubygems"
 require "bundler/setup"
 
 require 'rspec'
+require 'rails'
 
 require File.expand_path('../../lib/neat-pages', __FILE__)
 
