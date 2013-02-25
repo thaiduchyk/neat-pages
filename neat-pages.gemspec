@@ -3,14 +3,14 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = "neat-pages"
-  s.version     = "0.1.0"
+  s.version     = "0.1.1"
   s.authors     = ["Sebastien Rosa"]
   s.email       = ["sebastien@demarque.com"]
   s.extra_rdoc_files = ["LICENSE", "README.md"]
   s.licenses    = ["MIT"]
   s.homepage    = "https://github.com/demarque/neat-pages"
-  s.summary     = ""
-  s.description = ""
+  s.summary     = "A simple pagination API to paginate Mongoid Models."
+  s.description = "A simple pagination API to paginate Mongoid Models."
 
   s.rubyforge_project = "neat-pages"
 
