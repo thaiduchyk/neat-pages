@@ -9,6 +9,7 @@ ul#neat-pages-navigation{border-top:1px solid #ddd;clear:both;padding-top:30px;t
   }
   li.page.selected a{background:#ccc;border:1px solid #777;color:#222;font-weight:normal;padding:5px 9px;}
   li.move.disabled a{background-color:#eee;border:solid 1px #DEDEDE;color:#aaa;cursor:default;}
+  li.move.disabled a:hover{color:#aaa;}
 }
 
 /****************************************************************************

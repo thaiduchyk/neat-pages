@@ -12,10 +12,9 @@ class NeatPage
         $('#neat-pages-navigation li.page a').click (e) => @thatPage $(e.target) ; return false
 
 
+  buildURL: (noPage) -> encodeURI(@getPage(noPage).attr('href').replace('?', '.neatpage?'))
 
-  cachePage: (noPage) ->
-    url = @getPage(noPage).attr('href').replace('?', '.neatpage?')
-    $.get(url, (data) => @cachePages[noPage] = data)
+  cachePage: (noPage) -> $.get(@buildURL(noPage), (data) => @cachePages[noPage] = data)
 
 
   cacheNextPage: () ->
@@ -74,8 +73,7 @@ class NeatPage
     if @pageIsCached noPage
       @updatePage @cachePages[noPage], noPage
     else
-      url = @getPage(noPage).attr('href').replace('?', '.neatpage?')
-      $.get(url, (data) => @updatePage data, noPage)
+      $.get(@buildURL(noPage), (data) => @updatePage data, noPage)
 
 
   moveIsDisabled: (direction) -> $('#neat-pages-navigation li.' + direction).hasClass('disabled')
