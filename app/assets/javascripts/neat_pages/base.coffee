@@ -121,7 +121,7 @@ class NeatPage
     $('#neat-pages-ajax-wrapper').css( opacity: 1 )
     $('#neat-pages-ajax-wrapper').html(data)
     $('#neat-pages-ajax-wrapper').fadeIn(300)
-    $('body').scrollTop(0)
+    $('body, html').animate({scrollTop : 0}, 0);
 
     $('#neat-pages-navigation').trigger 'change'
 
