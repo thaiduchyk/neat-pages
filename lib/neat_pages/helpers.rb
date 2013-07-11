@@ -4,7 +4,7 @@ module NeatPages::Helpers
   end
 
   def neat_pages_base_url
-    request.protocol + request.host + request.path_info
+    "#{request.protocol}#{request.host}#{request.port == 80 ? '' : ':' + request.port.to_s}#{request.path_info}"
   end
 
   def neat_pages_base_params

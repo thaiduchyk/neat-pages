@@ -86,7 +86,14 @@ Create the file *app/views/products/index.neatpage.erb* and place the following 
   <% self.formats = ["html"] %>
   <%= render 'products', products: @products %>
 ```
+### Events
 
+#### `neat_pages:update`
+
+Triggered on `'body'` whenever a page has changed, from cache or from server.
+The event data is an object literal which holds those fields:
+
+`noPage` The current page number
 
 Locales
 -------
