@@ -72,8 +72,13 @@ class NeatPage
 
     if @pageIsCached noPage
       @updatePage @cachePages[noPage], noPage
+      $('body').trigger('neat_pages:update', {noPage: noPage})
     else
-      $.get(@buildURL(noPage), (data) => @updatePage data, noPage)
+      $.get(
+        @buildURL(noPage), (data) => @updatePage data, noPage
+      ).done(() ->
+        $('body').trigger('neat_pages:update', {noPage: noPage})
+      )
 
 
   moveIsDisabled: (direction) -> $('#neat-pages-navigation li.' + direction).hasClass('disabled')
