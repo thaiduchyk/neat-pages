@@ -3,7 +3,7 @@ class NeatPages::Helpers::Builder
     @pagination = pagination
     @base_url = base_url
     @params = params
-
+    @params.delete('utf8')
     reset_builder
   end
 
@@ -21,11 +21,7 @@ class NeatPages::Helpers::Builder
   end
 
   def path_to(page)
-    qs = ["page=#{page}"]
-
-    @params.each { |k,v| qs << "#{k}=#{v}" if k != 'page' }
-
-    return @base_url + '?' + qs.join("&")
+    return @base_url + '?' + @params.map { |k,v| "#{k}=#{v}"}.join('&') + "&page=#{page}"
   end
 
   def reset_builder
