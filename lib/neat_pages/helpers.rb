@@ -1,6 +1,8 @@
 module NeatPages::Helpers
   def neat_pages_ajax_items(partial_path, options={})
-    ('<div id="neat-pages-ajax-wrapper" class="first-load">' + render(partial_path, options) + '</div>').html_safe
+    options = { wrapper: :div }.merge(options)
+
+    ("<#{options[:wrapper]} id=\"neat-pages-ajax-wrapper\" class=\"first-load\">" + render(partial_path, options) + "</#{options[:wrapper]}>").html_safe
   end
 
   def neat_pages_base_url
