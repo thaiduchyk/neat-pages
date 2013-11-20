@@ -14,10 +14,10 @@ Gem::Specification.new do |gem|
   gem.test_files  = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
-  gem.add_dependency "rails", ['>= 3.0.0']
+  gem.add_dependency "rails", ['>= 4.0']
   gem.add_development_dependency "sqlite3"
   gem.add_development_dependency "rspec-rails"
   gem.add_development_dependency "simplecov"
   gem.add_development_dependency "simplecov-rcov-text"
-  gem.add_development_dependency "coveralls"
+  #gem.add_development_dependency "coveralls"
 end

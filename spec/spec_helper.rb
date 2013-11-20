@@ -19,7 +19,7 @@ require File.expand_path("../dummy/config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 
-require 'coveralls'
+#require 'coveralls'
 #Coveralls.wear!
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f }
