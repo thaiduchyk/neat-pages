@@ -1,23 +1,23 @@
-# -*- encoding: utf-8 -*-
-$:.push File.expand_path("../lib", __FILE__)
+Gem::Specification.new do |gem|
+  gem.name        = "neat-pages"
+  gem.description = "A simple pagination API to paginate Mongoid Models."
+  gem.summary     = "A simple pagination API to paginate Mongoid Models."
+  gem.homepage    = "https://github.com/demarque/neat-pages"
+  gem.version     = "1.0.0"
+  gem.licenses    = ["MIT"]
 
-Gem::Specification.new do |s|
-  s.name        = "neat-pages"
-  s.version     = "0.1.7"
-  s.authors     = ["Sebastien Rosa"]
-  s.email       = ["sebastien@demarque.com"]
-  s.extra_rdoc_files = ["LICENSE", "README.md"]
-  s.licenses    = ["MIT"]
-  s.homepage    = "https://github.com/demarque/neat-pages"
-  s.summary     = "A simple pagination API to paginate Mongoid Models."
-  s.description = "A simple pagination API to paginate Mongoid Models."
+  gem.authors     = ["Sebastien Rosa"]
+  gem.email       = ["srosa@alchimik.com"]
 
-  s.rubyforge_project = "neat-pages"
+  gem.files       = `git ls-files`.split($\)
+  gem.executables = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
+  gem.test_files  = gem.files.grep(%r{^(test|spec|features)/})
+  gem.require_paths = ["lib"]
 
-  s.files         = Dir.glob('{app,config,lib,spec,vendor}/**/*') + %w(LICENSE README.md Rakefile Gemfile)
-  s.require_paths = ["lib"]
-
-  s.add_development_dependency('rake', ['>= 0.8.7'])
-  s.add_development_dependency('rspec', ['>= 2.0'])
-  s.add_development_dependency('rails', ['>= 3.0'])
+  gem.add_dependency "rails", ['>= 3.0.0']
+  gem.add_development_dependency "sqlite3"
+  gem.add_development_dependency "rspec-rails"
+  gem.add_development_dependency "simplecov"
+  gem.add_development_dependency "simplecov-rcov-text"
+  gem.add_development_dependency "coveralls"
 end

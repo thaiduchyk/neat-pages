@@ -1,4 +1,4 @@
-Neat Pages [![Build Status](https://secure.travis-ci.org/demarque/neat-pages.png?branch=master)](http://travis-ci.org/demarque/neat-pages)
+Neat Pages [![Build Status](https://secure.travis-ci.org/alchimikweb/neat-pages.png?branch=master)](http://travis-ci.org/alchimikweb/neat-pages) [![Code Climate](https://codeclimate.com/repos/528cee3ff3ea004423002e3a/badges/827a98ba3031fc15077c/gpa.png)](https://codeclimate.com/repos/528cee3ff3ea004423002e3a/feed) [![Coverage Status](https://coveralls.io/repos/alchimikweb/neat-pages/badge.png)](https://coveralls.io/r/alchimikweb/neat-pages)
 ===============
 
 A simple pagination API to paginate Mongoid Models.
@@ -10,10 +10,7 @@ Install
 gem install neat-pages
 ```
 
-Rails 3
--------
-
-In your Gemfile:
+or add the following line to Gemfile:
 
 ```ruby
 gem 'neat-pages'
