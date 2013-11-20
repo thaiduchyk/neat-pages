@@ -1,3 +1,6 @@
+#*************************************************************************************
+# Insert a bunch of helper methods in the ActionView::Base of a Rails project.
+#*************************************************************************************
 module NeatPages::Helpers
   def neat_pages_ajax_items(partial_path, options={})
     options = { wrapper: :div }.merge(options)

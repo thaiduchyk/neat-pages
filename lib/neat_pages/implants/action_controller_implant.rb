@@ -1,3 +1,6 @@
+#*************************************************************************************
+# Insert methods in the Action Controller of a Rails project.
+#*************************************************************************************
 module NeatPages::Implants::ActionControllerImplant
   extend ActiveSupport::Concern
 

@@ -10,13 +10,13 @@ module NeatPages
     #*************************************************************************************
     # CONSTRUCTOR
     #*************************************************************************************
-    def initialize(current_page, options={})
+    def initialize(current_page_param, options={})
       options = { per_page: 10, total_items: 0 }.merge(options)
 
       @per_page = options[:per_page].to_i
       @total_items = options[:total_items]
 
-      @current_page = init_current_page(current_page)
+      init_current_page current_page_param
 
       @out_of_bound = init_out_of_bound
     end
@@ -89,11 +89,9 @@ module NeatPages
     #*************************************************************************************
     # PRIVATE INSTANCE METHODS
     #*************************************************************************************
-    def init_current_page(current_page)
-      current_page = current_page.to_i
-      current_page = 1 if current_page == 0
-
-      return current_page
+    def init_current_page(current_page_param)
+      @current_page = current_page_param.to_i
+      @current_page = 1 if @current_page == 0
     end
 
     def init_out_of_bound

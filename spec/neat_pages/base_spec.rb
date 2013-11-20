@@ -107,7 +107,7 @@ describe NeatPages::Base do
       its(:length) { should eql 4 }
       its(['X-Total-Items']) { should eql '200' }
       its(['X-Total-Pages']) { should eql '20' }
-      its(['X-Per-Page']) { should eql '10' }#
+      its(['X-Per-Page']) { should eql '10' }
       its(['X-Current-Page']) { should eql '1' }
     end
   end

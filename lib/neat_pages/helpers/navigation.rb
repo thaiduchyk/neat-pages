@@ -1,3 +1,10 @@
+#*************************************************************************************
+# Navigation take care of generating the html code for the pagination navigation.
+#
+# Output Example
+#
+# < Previous | 1 | 2 | 3 | Next >
+#*************************************************************************************
 class NeatPages::Helpers::Navigation < NeatPages::Helpers::Builder
   def generate(options={})
     options = { format: :standard }.merge(options)
@@ -7,7 +14,7 @@ class NeatPages::Helpers::Navigation < NeatPages::Helpers::Builder
     reset_builder
 
     return case options[:format]
-      when :light then navigation_light
+      when :light then navigation_light 'light'
       else navigation_standard
     end
   end
@@ -47,16 +54,6 @@ class NeatPages::Helpers::Navigation < NeatPages::Helpers::Builder
     b li(content, "move #{direction} #{list_class}")
   end
 
-  def navigation_light
-    b '<ul class="light" ' + navigation_attributes + '>'
-    navigation_list_link 'previous', previous?
-    navigation_page_items(10)
-    navigation_list_link 'next', next?
-    b '</ul>'
-
-    return b
-  end
-
   def navigation_link(direction)
     link_to(navigation_label(direction), send("#{direction}_page"), class: direction)
   end
@@ -75,8 +72,8 @@ class NeatPages::Helpers::Navigation < NeatPages::Helpers::Builder
     end
   end
 
-  def navigation_standard
-    b '<ul class="standard" ' + navigation_attributes + '>'
+  def navigation_standard(class_name='standard')
+    b '<ul class="' + class_name + '" ' + navigation_attributes + '>'
     navigation_list_link 'previous', previous?
     navigation_page_items(10)
     navigation_list_link 'next', next?

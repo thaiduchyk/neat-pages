@@ -1,3 +1,6 @@
+#*************************************************************************************
+# Builder will help build a string of html output.
+#*************************************************************************************
 class NeatPages::Helpers::Builder
   def initialize(pagination, base_url, params)
     @pagination = pagination
