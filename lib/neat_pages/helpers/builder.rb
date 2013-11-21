@@ -33,7 +33,7 @@ class NeatPages::Helpers::Builder
 
   def path_to(page)
     "#{@base_url}?" +
-    @params.map { |k,v| "#{k}=#{v}"}.join('&') +
+    @params.map { |k,v| "#{k}=#{v}" if k != 'page' }.compact.join('&') +
     (@params.empty? ? '' : '&') +
     "page=#{page}"
   end
