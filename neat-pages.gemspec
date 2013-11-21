@@ -19,5 +19,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "rspec-rails"
   gem.add_development_dependency "simplecov"
   gem.add_development_dependency "simplecov-rcov-text"
-  #gem.add_development_dependency "coveralls"
+  gem.add_development_dependency "coveralls"
 end
