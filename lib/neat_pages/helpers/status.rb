@@ -7,6 +7,10 @@
 # 30 to 40 / 300
 #*************************************************************************************
 class NeatPages::Helpers::Status < NeatPages::Helpers::Builder
+  delegate :empty?,         to: :pagination
+  delegate :offset,         to: :pagination
+  delegate :out_of_bound?,  to: :pagination
+
   def generate
     return '' if empty? or out_of_bound?
 
@@ -14,6 +18,8 @@ class NeatPages::Helpers::Status < NeatPages::Helpers::Builder
 
     return build_status from, to
   end
+
+  private
 
   def build_status(from, to)
     reset_builder

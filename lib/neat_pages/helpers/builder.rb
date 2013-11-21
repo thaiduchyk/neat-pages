@@ -2,29 +2,40 @@
 # Builder will help build a string of html output.
 #*************************************************************************************
 class NeatPages::Helpers::Builder
-  def initialize(pagination, base_url, params)
+  attr_reader :pagination
+
+  delegate :per_page,     to: :pagination
+  delegate :total_items,  to: :pagination
+
+  def initialize(pagination, request)
     @pagination = pagination
-    @base_url = base_url
-    @params = params
+    @base_url = generate_base_url_from_request(request)
+    @params = request.env['action_dispatch.request.query_parameters']
     @params.delete('utf8')
+
     reset_builder
   end
 
   def b(str='')
     @builder << str
 
-    return @builder.html_safe
+    @builder.html_safe
   end
 
-  def li(content, css_class='', hidden=false)
-    attributes = 'class="' + css_class + '" '
-    attributes << 'style="display:none"' if hidden
+  def li(content, css_class='', options={})
+    options = { hidden: false }.merge(options)
 
-    return "<li #{attributes}>#{content}</li>"
+    attributes = ' class="' + css_class + '"' if not css_class.empty?
+    attributes << ' style="display:none"' if options[:hidden]
+
+    b "<li#{attributes}>#{content}</li>"
   end
 
   def path_to(page)
-    return @base_url + '?' + @params.map { |k,v| "#{k}=#{v}"}.join('&') + "&page=#{page}"
+    "#{@base_url}?" +
+    @params.map { |k,v| "#{k}=#{v}"}.join('&') +
+    (@params.empty? ? '' : '&') +
+    "page=#{page}"
   end
 
   def reset_builder
@@ -35,12 +46,9 @@ class NeatPages::Helpers::Builder
     (defined? I18n) ? I18n.t("neat_pages.#{text_path}") : text_path
   end
 
-  def method_missing(*args, &block)
-    if @pagination.respond_to? args.first
-      return @pagination.send *args, &block
-    else
-      raise NoMethodError.new("undefined local variable or method '#{args.first}' for #{self.class}")
-    end
-  end
+  private
 
+  def generate_base_url_from_request(request)
+    "#{request.protocol}#{request.host}#{request.port == 80 ? '' : ':' + request.port.to_s}#{request.path_info}"
+  end
 end

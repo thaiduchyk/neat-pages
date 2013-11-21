@@ -8,20 +8,13 @@ module NeatPages::Helpers
     ("<#{options[:wrapper]} id=\"neat-pages-ajax-wrapper\" class=\"first-load\">" + render(partial_path, options) + "</#{options[:wrapper]}>").html_safe
   end
 
-  def neat_pages_base_url
-    "#{request.protocol}#{request.host}#{request.port == 80 ? '' : ':' + request.port.to_s}#{request.path_info}"
-  end
-
-  def neat_pages_base_params
-    request.env['action_dispatch.request.query_parameters']
-  end
-
+  # DEPRECATED : The options parameter is deprecated. I left it here for backward compatibility. (2013-11-20)
   def neat_pages_navigation(options={})
-    NeatPages::Helpers::Navigation.new(pagination, neat_pages_base_url, neat_pages_base_params).generate(options)
+    NeatPages::Helpers::Navigation.new(pagination, request).generate
   end
 
   def neat_pages_status
-    NeatPages::Helpers::Status.new(pagination, neat_pages_base_url, neat_pages_base_params).generate
+    NeatPages::Helpers::Status.new(pagination, request).generate
   end
 
   ::ActionView::Base.send :include, self

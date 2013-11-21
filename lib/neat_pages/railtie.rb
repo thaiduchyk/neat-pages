@@ -1,6 +1,4 @@
-require 'neat_pages/implants/action_controller_implant'
-
-module NeatPages::Implants
+module NeatPages
   class Railtie < Rails::Railtie
     initializer "neat-pages" do |app|
       ActiveSupport.on_load :action_controller do
@@ -14,9 +12,14 @@ module NeatPages::Implants
       Mime::Type.register "text/html", :neatpage if not Mime::Type.lookup_by_extension :neatpage
     end
   end
+
+  module Implants
+  end
 end
 
 dir = File.expand_path(File.dirname(__FILE__))
 
-I18n.load_path << File.join(dir, '../../../config/locales', 'fr.yml')
+I18n.load_path << File.join(dir, '../../config/locales', 'fr.yml')
 
+require 'neat_pages/implants/action_controller_implant'
+require 'neat_pages/implants/mongoid_implant'

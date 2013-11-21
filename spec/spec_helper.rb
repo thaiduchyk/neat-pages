@@ -22,7 +22,7 @@ require 'rspec/autorun'
 #require 'coveralls'
 #Coveralls.wear!
 
-Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f }
+Dir["./spec/support/**/*.rb"].sort.each {|f| require f }
 
 RSpec.configure do |config|
   config.mock_with :rspec

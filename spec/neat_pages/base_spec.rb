@@ -1,9 +1,6 @@
 require 'spec_helper'
 
 describe NeatPages::Base do
-  #*************************************************************************************
-  # PUBLIC INSTANCE METHODS
-  #*************************************************************************************
   describe "#empty?" do
     context "with a 20 items pagination" do
       specify { NeatPages::Base.new(0, total_items: 20).should_not be_empty }
@@ -11,6 +8,12 @@ describe NeatPages::Base do
 
     context "with a 0 item pagination" do
       specify { NeatPages::Base.new(0).should be_empty }
+    end
+  end
+
+  describe "#limit" do
+    context "with a 100 items pagination starting at 0 and having 10 items per page" do
+      specify { NeatPages::Base.new(0, per_page: 10, total_items: 100).limit.should eql 10 }
     end
   end
 
@@ -62,6 +65,16 @@ describe NeatPages::Base do
     end
   end
 
+  describe "#paginated?" do
+    context "with a 20 items pagination starting at page 1 and having 10 items per page" do
+      specify { NeatPages::Base.new(1, per_page: 10, total_items: 20).should be_paginated }
+    end
+
+    context "with a 5 items pagination starting at page 1 and having 10 items per page" do
+      specify { NeatPages::Base.new(1, per_page: 10, total_items: 5).should_not be_paginated }
+    end
+  end
+
   describe "#previous_page" do
     context "with a 100 items pagination starting at page 5 and having 10 items per page" do
       specify { NeatPages::Base.new(5, per_page: 10, total_items: 100).previous_page.should eql 4 }
@@ -95,7 +108,7 @@ describe NeatPages::Base do
       specify { NeatPages::Base.new(2, per_page: 10, total_items: 100).should be_previous }
     end
 
-    context "with a 5 items pagination starting at 0 and having 10 items per page" do
+    context "with a 5 items pagination starting at page 0 and having 10 items per page" do
       specify { NeatPages::Base.new(0, per_page: 10, total_items: 5).should_not be_previous }
     end
   end
@@ -109,6 +122,19 @@ describe NeatPages::Base do
       its(['X-Total-Pages']) { should eql '20' }
       its(['X-Per-Page']) { should eql '10' }
       its(['X-Current-Page']) { should eql '1' }
+    end
+  end
+
+  describe "#set_total_items" do
+    context "with a 100 items pagination starting at page 2 and having 10 items per page" do
+      let(:pagination) { NeatPages::Base.new(2, per_page: 10, total_items: 100) }
+
+      context "when changing the total items to 5" do
+        before { pagination.set_total_items 5 }
+
+        specify { pagination.should be_out_of_bound }
+        specify { pagination.total_items.should eql 5 }
+      end
     end
   end
 

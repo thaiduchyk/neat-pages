@@ -6,17 +6,20 @@
 # < Previous | 1 | 2 | 3 | Next >
 #*************************************************************************************
 class NeatPages::Helpers::Navigation < NeatPages::Helpers::Builder
-  def generate(options={})
-    options = { format: :standard }.merge(options)
+  delegate :current_page,   to: :pagination
+  delegate :next?,          to: :pagination
+  delegate :next_page,      to: :pagination
+  delegate :paginated?,     to: :pagination
+  delegate :previous?,      to: :pagination
+  delegate :previous_page,  to: :pagination
+  delegate :total_pages,    to: :pagination
 
+  def generate
     return '' if not paginated?
 
     reset_builder
 
-    return case options[:format]
-      when :light then navigation_light 'light'
-      else navigation_standard
-    end
+    navigation_standard
   end
 
   private
@@ -24,9 +27,11 @@ class NeatPages::Helpers::Navigation < NeatPages::Helpers::Builder
   def link_to(label, no_page, options={})
     options = { class: '' }.merge(options)
 
-    url = (no_page == '#' ? '#' : path_to(no_page))
+    attributes = { "data-page" => no_page }
+    attributes["href"] = (no_page == '#' ? '#' : path_to(no_page))
+    attributes["class"] = options[:class] if not options[:class].blank?
 
-    return "<a href=\"#{url}\" data-page=\"#{no_page}\" class=\"#{options[:class]}\">#{label}</a>"
+    return "<a " + attributes.map{ |k,v| "#{k}=\"#{v}\"" }.join(" ") + ">#{label}</a>"
   end
 
   def link_to_page(no_page)
@@ -51,7 +56,7 @@ class NeatPages::Helpers::Navigation < NeatPages::Helpers::Builder
     list_class = enabled ? '' : 'disabled'
     content = enabled ? navigation_link(direction) : link_to(navigation_label(direction), '#', class: direction)
 
-    b li(content, "move #{direction} #{list_class}")
+    li(content, "move #{direction} #{list_class}")
   end
 
   def navigation_link(direction)
@@ -59,6 +64,29 @@ class NeatPages::Helpers::Navigation < NeatPages::Helpers::Builder
   end
 
   def navigation_page_items(nbr_items=10)
+    start, finish = get_bounds_of_pages nbr_items
+
+    (1..total_pages).each do |i|
+      hidden = (i < start or i > finish)
+      if current_page == i
+        li link_to_page(i), 'page selected'
+      else
+        li link_to_page(i), 'page', hidden: hidden
+      end
+    end
+  end
+
+  def navigation_standard
+    b '<ul class="standard" ' + navigation_attributes + '>'
+    navigation_list_link 'previous', previous?
+    navigation_page_items(10)
+    navigation_list_link 'next', next?
+    b '</ul>'
+
+    return b
+  end
+
+  def get_bounds_of_pages(nbr_items)
     half_nbr_items = nbr_items / 2
 
     start = current_page > half_nbr_items ? (current_page - half_nbr_items + 1) : 1
@@ -66,20 +94,7 @@ class NeatPages::Helpers::Navigation < NeatPages::Helpers::Builder
     start = (finish - nbr_items + 1) if start - finish < nbr_items
     start = 1 if start < 1
 
-    (1..total_pages).each do |i|
-      hidden = (i < start or i > finish)
-      b (current_page == i ? li(link_to_page(i), 'page selected') : li(link_to_page(i), 'page', hidden))
-    end
-  end
-
-  def navigation_standard(class_name='standard')
-    b '<ul class="' + class_name + '" ' + navigation_attributes + '>'
-    navigation_list_link 'previous', previous?
-    navigation_page_items(10)
-    navigation_list_link 'next', next?
-    b '</ul>'
-
-    return b
+    return [start, finish]
   end
 
 end

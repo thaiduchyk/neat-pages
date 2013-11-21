@@ -11,7 +11,7 @@ module NeatPages::Implants::MongoidCriteriaImplant
 
       return self.offset(current.offset).limit(current.limit)
     else
-      raise 'You need to initialize the pagination'
+      raise NeatPages::Uninitalized, 'You need to initialize the pagination'
     end
   end
 end
