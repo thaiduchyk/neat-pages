@@ -12,7 +12,14 @@ class NeatPage
         $('#neat-pages-navigation li.page a').click (e) => @thatPage $(e.target) ; return false
 
 
-  buildURL: (noPage) -> encodeURI(@getPage(noPage).attr('href').replace('?', '.neatpage?'))
+  buildURL: (noPage) ->
+    url = @getPage(noPage).attr('href')
+
+    if window.location.pathname is '/' or window.location.pathname is ''
+      encodeURI(url + '&format=neatpage')
+    else
+      encodeURI(url.replace('?', '.neatpage?'))
+
 
   cachePage: (noPage) -> $.get(@buildURL(noPage), (data) => @cachePages[noPage] = data)
 
