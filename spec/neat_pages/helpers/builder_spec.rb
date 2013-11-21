@@ -71,6 +71,15 @@ describe NeatPages::Helpers::Builder do
           specify { builder.path_to(6).should eql 'http://www.test.dev?sort=1&filter=type&page=6' }
         end
       end
+
+      context "and the params page=5" do
+        let(:request) { request_mock(host: 'www.test.dev', env: { 'action_dispatch.request.query_parameters' => { 'page' => 5 } })}
+        let(:builder) { NeatPages::Helpers::Builder.new(double, request) }
+
+        context "when asking for the path_to page 6" do
+          specify { builder.path_to(6).should eql 'http://www.test.dev?page=6' }
+        end
+      end
     end
   end
 

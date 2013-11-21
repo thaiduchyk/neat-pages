@@ -32,10 +32,9 @@ class NeatPages::Helpers::Builder
   end
 
   def path_to(page)
-    "#{@base_url}?" +
-    @params.map { |k,v| "#{k}=#{v}" if k != 'page' }.compact.join('&') +
-    (@params.empty? ? '' : '&') +
-    "page=#{page}"
+    qs = @params.map { |k,v| "#{k}=#{v}" if k != 'page' }.compact.join('&')
+
+    "#{@base_url}?#{qs}" + (qs.empty? ? '' : '&') + "page=#{page}"
   end
 
   def reset_builder
