@@ -72,6 +72,15 @@ describe NeatPages::Helpers::Builder do
         end
       end
 
+      context "and the params tags=['foo', 'bar'], page=5" do
+        let(:request) { request_mock(host: 'www.test.dev', env: { 'action_dispatch.request.query_parameters' => { 'page' => 5, 'tags' => ['foo', 'bar'] } })}
+        let(:builder) { NeatPages::Helpers::Builder.new(double, request) }
+
+        context "when asking for the path_to page 6" do
+          specify { builder.path_to(6).should eql 'http://www.test.dev?tags%5B%5D=foo&tags%5B%5D=bar&page=6' }
+        end
+      end
+
       context "and the params page=5" do
         let(:request) { request_mock(host: 'www.test.dev', env: { 'action_dispatch.request.query_parameters' => { 'page' => 5 } })}
         let(:builder) { NeatPages::Helpers::Builder.new(double, request) }

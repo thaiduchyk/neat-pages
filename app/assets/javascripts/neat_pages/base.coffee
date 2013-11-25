@@ -14,6 +14,7 @@ class NeatPage
 
   buildURL: (noPage) ->
     url = @getPage(noPage).attr('href')
+    url = url.replace('%5B', '[').replace('%5D', ']') # Make sure the array parameters won't be encoded twice. Careful before removing the encodeURI down there, it could create some bugs.
 
     if window.location.pathname is '/' or window.location.pathname is ''
       encodeURI(url + '&format=neatpage')

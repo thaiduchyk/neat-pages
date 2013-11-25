@@ -32,7 +32,7 @@ class NeatPages::Helpers::Builder
   end
 
   def path_to(page)
-    qs = @params.map { |k,v| "#{k}=#{v}" if k != 'page' }.compact.join('&')
+    qs = @params.map { |k,v| to_params(k,v) if k != 'page' }.compact.join('&')
 
     "#{@base_url}?#{qs}" + (qs.empty? ? '' : '&') + "page=#{page}"
   end
@@ -49,5 +49,13 @@ class NeatPages::Helpers::Builder
 
   def generate_base_url_from_request(request)
     "#{request.protocol}#{request.host}#{request.port == 80 ? '' : ':' + request.port.to_s}#{request.path_info}"
+  end
+
+  def to_params(key, value)
+    if value.is_a? Array
+      value.map{ |v| "#{key}%5B%5D=#{v}"}
+    else
+      "#{key}=#{value}"
+    end
   end
 end
