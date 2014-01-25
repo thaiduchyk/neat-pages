@@ -47,6 +47,26 @@ describe NeatPages::Helpers do
     end
   end
 
+  describe "#neat_pages_link_relation_tags" do
+    before do
+      views.stub(:request).and_return(request_mock(host: 'testview.dev'))
+
+      pagination.stub(:paginated?).and_return(true)
+      pagination.stub(:current_page).and_return(3)
+      pagination.stub(:next?).and_return(true)
+      pagination.stub(:next_page).and_return(4)
+      pagination.stub(:previous?).and_return(true)
+      pagination.stub(:previous_page).and_return(2)
+      pagination.stub(:total_pages).and_return(4)
+
+      views.stub(:pagination).and_return(pagination)
+    end
+
+    context "when rendering the relations" do
+      specify { views.neat_pages_link_relation_tags.should eql "<link rel=\"prev\" href=\"http://testview.dev?page=2\"/>\n<link rel=\"next\" href=\"http://testview.dev?page=4\"/>\n" }
+    end
+  end
+
   describe "#neat_pages_status" do
     before do
       views.stub(:request).and_return(request_mock)

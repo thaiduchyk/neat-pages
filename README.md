@@ -113,10 +113,13 @@ This method will render the text 'out_of_bound' with a status 404. If you want, 
 
 Activate the ajax pagination. See the previous example.
 
-
 ``` neat_pages_navigation ```
 
 Generate a page navigation. (ex: < 1 2 3 4 >)
+
+``` neat_pages_link_relation_tags ```
+
+Put this line in the head tag to generate the link relation tags
 
 ``` neat_pages_status ```
 

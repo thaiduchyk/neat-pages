@@ -13,6 +13,10 @@ module NeatPages::Helpers
     NeatPages::Helpers::Navigation.new(pagination, request).generate
   end
 
+  def neat_pages_link_relation_tags
+    NeatPages::Helpers::Relation.new(pagination, request).generate
+  end
+
   def neat_pages_status
     NeatPages::Helpers::Status.new(pagination, request).generate
   end
@@ -22,4 +26,5 @@ end
 
 require 'neat_pages/helpers/builder'
 require 'neat_pages/helpers/navigation'
+require 'neat_pages/helpers/relation'
 require 'neat_pages/helpers/status'
