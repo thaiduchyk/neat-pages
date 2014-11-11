@@ -1,7 +1,7 @@
 Neat Pages [![Build Status](https://secure.travis-ci.org/alchimikweb/neat-pages.png?branch=master)](http://travis-ci.org/alchimikweb/neat-pages) [![Code Climate](https://codeclimate.com/github/alchimikweb/neat-pages.png)](https://codeclimate.com/github/alchimikweb/neat-pages) [![Coverage Status](https://coveralls.io/repos/alchimikweb/neat-pages/badge.png)](https://coveralls.io/r/alchimikweb/neat-pages)
 ===============
 
-A simple pagination API to paginate Mongoid models.
+A simple pagination API to paginate ActiveRecord and Mongoid models.
 
 Install
 -------
@@ -112,6 +112,17 @@ This method will render the text 'out_of_bound' with a status 404. If you want, 
 ```neat_pages_ajax_items(partial_path, options={})```
 
 Activate the ajax pagination. See the previous example.
+
+This will wrap the content of your partial in a div by default. If your items are in a table
+you can pass the parameter ``` wrapper: 'tbody' ```. So the call would look like that :
+
+```erb
+  <%# app/views/products/index.html.erb %>
+  <table>
+    <%= neat_pages_ajax_items 'products', products: @products, wrapper: 'tbody' %>
+  </table>
+  <%= neat_pages_navigation %>
+```
 
 ``` neat_pages_navigation ```
 
