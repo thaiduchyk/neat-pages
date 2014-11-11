@@ -23,3 +23,4 @@ I18n.load_path << File.join(dir, '../../config/locales', 'fr.yml')
 
 require 'neat_pages/implants/action_controller_implant'
 require 'neat_pages/implants/mongoid_implant'
+require 'neat_pages/implants/active_record_implant'
