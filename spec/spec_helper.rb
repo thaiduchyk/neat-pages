@@ -19,7 +19,8 @@ end
 require File.expand_path("../dummy/config/environment", __FILE__)
 
 require 'rspec/rails'
-require 'rspec/autorun'
+require 'rspec/its'
+#require 'rspec/autorun'
 
 Dir["./spec/support/**/*.rb"].sort.each {|f| require f }
 

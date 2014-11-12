@@ -17,8 +17,8 @@ describe ApplicationController, type: :controller do
 
       expect(response.status).to eq(404)
       expect(response.body).to eq "out_of_bound"
-      controller.pagination.per_page.should eql 20
-      response.headers["X-Per-Page"].should eql "20"
+      expect(controller.pagination.per_page).to eql 20
+      expect(response.headers["X-Per-Page"]).to eql "20"
     end
   end
 end

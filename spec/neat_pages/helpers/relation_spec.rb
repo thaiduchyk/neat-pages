@@ -19,8 +19,8 @@ describe NeatPages::Helpers::Relation do
 
       let(:builder) { NeatPages::Helpers::Relation.new(pagination, request_mock) }
 
-      context "when generating relations" do
-        specify { builder.generate.should eql "<link rel=\"next\" href=\"http://test.dev?page=2\"/>\n" }
+      specify "when generating relations" do
+        expect(builder.generate).to eql "<link rel=\"next\" href=\"http://test.dev?page=2\"/>\n"
       end
     end
 
@@ -37,8 +37,8 @@ describe NeatPages::Helpers::Relation do
 
       let(:builder) { NeatPages::Helpers::Relation.new(pagination, request_mock) }
 
-      context "when generating relations" do
-        specify { builder.generate.should eql "<link rel=\"prev\" href=\"http://test.dev?page=1\"/>\n<link rel=\"next\" href=\"http://test.dev?page=3\"/>\n" }
+      specify "when generating relations" do
+        expect(builder.generate).to eql "<link rel=\"prev\" href=\"http://test.dev?page=1\"/>\n<link rel=\"next\" href=\"http://test.dev?page=3\"/>\n"
       end
     end
 
@@ -54,8 +54,8 @@ describe NeatPages::Helpers::Relation do
 
       let(:builder) { NeatPages::Helpers::Relation.new(pagination, request_mock) }
 
-      context "when generating relations" do
-        specify { builder.generate.should eql "<link rel=\"prev\" href=\"http://test.dev?page=3\"/>\n" }
+      specify "when generating relations" do
+        expect(builder.generate).to eql "<link rel=\"prev\" href=\"http://test.dev?page=3\"/>\n"
       end
     end
 

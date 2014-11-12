@@ -31,13 +31,13 @@ describe NeatPages::Helpers::Builder do
       context "when inserting a li with the value 1" do
         before { builder.li '1' }
 
-        specify { builder.b.should eql '<li>1</li>' }
+        specify { expect(builder.b).to eql '<li>1</li>' }
       end
 
       context "when inserting an hidden li with the value 1, the css_class 'active'" do
         before { builder.li '1', 'active', hidden: true }
 
-        specify { builder.b.should eql '<li class="active" style="display:none">1</li>' }
+        specify { expect(builder.b).to eql '<li class="active" style="display:none">1</li>' }
       end
 
     end
@@ -49,8 +49,8 @@ describe NeatPages::Helpers::Builder do
       context "and no params" do
         let(:builder) { NeatPages::Helpers::Builder.new(double, request_mock(host: 'www.test.dev')) }
 
-        context "when asking for the path_to page 6" do
-          specify { builder.path_to(6).should eql 'http://www.test.dev?page=6' }
+        specify "when asking for the path_to page 6" do
+          expect(builder.path_to(6)).to eql 'http://www.test.dev?page=6'
         end
       end
 
@@ -58,8 +58,8 @@ describe NeatPages::Helpers::Builder do
         let(:request) { request_mock(host: 'www.test.dev', env: { 'action_dispatch.request.query_parameters' => { 'sort' => 1, 'filter' => 'type' } })}
         let(:builder) { NeatPages::Helpers::Builder.new(double, request) }
 
-        context "when asking for the path_to page 6" do
-          specify { builder.path_to(6).should eql 'http://www.test.dev?filter=type&page=6&sort=1' }
+        specify "when asking for the path_to page 6" do
+          expect(builder.path_to(6)).to eql 'http://www.test.dev?filter=type&page=6&sort=1'
         end
       end
 
@@ -67,8 +67,8 @@ describe NeatPages::Helpers::Builder do
         let(:request) { request_mock(host: 'www.test.dev', env: { 'action_dispatch.request.query_parameters' => { 'sort' => 1, 'filter' => 'type', 'page' => 5 } })}
         let(:builder) { NeatPages::Helpers::Builder.new(double, request) }
 
-        context "when asking for the path_to page 6" do
-          specify { builder.path_to(6).should eql 'http://www.test.dev?filter=type&page=6&sort=1' }
+        specify "when asking for the path_to page 6" do
+          expect(builder.path_to(6)).to eql 'http://www.test.dev?filter=type&page=6&sort=1'
         end
       end
 
@@ -76,8 +76,8 @@ describe NeatPages::Helpers::Builder do
         let(:request) { request_mock(host: 'www.test.dev', env: { 'action_dispatch.request.query_parameters' => { 'page' => 5, 'tags' => ['foo', 'bar'] } })}
         let(:builder) { NeatPages::Helpers::Builder.new(double, request) }
 
-        context "when asking for the path_to page 6" do
-          specify { builder.path_to(6).should eql 'http://www.test.dev?page=6&tags%5B%5D=foo&tags%5B%5D=bar' }
+        specify "when asking for the path_to page 6" do
+          expect(builder.path_to(6)).to eql 'http://www.test.dev?page=6&tags%5B%5D=foo&tags%5B%5D=bar'
         end
       end
 
@@ -85,8 +85,8 @@ describe NeatPages::Helpers::Builder do
         let(:request) { request_mock(host: 'www.test.dev', env: { 'action_dispatch.request.query_parameters' => { 'page' => 5, 'filters' => { 'foo' => '1', 'bar' => '2' } } })}
         let(:builder) { NeatPages::Helpers::Builder.new(double, request) }
 
-        context "when asking for the path_to page 6" do
-          specify { builder.path_to(6).should eql 'http://www.test.dev?filters%5Bbar%5D=2&filters%5Bfoo%5D=1&page=6' }
+        specify "when asking for the path_to page 6" do
+          expect(builder.path_to(6)).to eql 'http://www.test.dev?filters%5Bbar%5D=2&filters%5Bfoo%5D=1&page=6'
         end
       end
 
@@ -94,8 +94,8 @@ describe NeatPages::Helpers::Builder do
         let(:request) { request_mock(host: 'www.test.dev', env: { 'action_dispatch.request.query_parameters' => { 'page' => 5 } })}
         let(:builder) { NeatPages::Helpers::Builder.new(double, request) }
 
-        context "when asking for the path_to page 6" do
-          specify { builder.path_to(6).should eql 'http://www.test.dev?page=6' }
+        specify "when asking for the path_to page 6" do
+          expect(builder.path_to(6)).to eql 'http://www.test.dev?page=6'
         end
       end
     end
@@ -108,7 +108,7 @@ describe NeatPages::Helpers::Builder do
       context "when resetting the builder" do
         before { builder.reset_builder }
 
-        specify { builder.b.should eql '' }
+        specify { expect(builder.b).to eql '' }
       end
     end
 
@@ -120,7 +120,7 @@ describe NeatPages::Helpers::Builder do
       context "when resetting the builder" do
         before { builder.reset_builder }
 
-        specify { builder.b.should eql '' }
+        specify { expect(builder.b).to eql '' }
       end
     end
   end

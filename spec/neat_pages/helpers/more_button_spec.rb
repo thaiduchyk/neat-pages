@@ -12,8 +12,8 @@ describe NeatPages::Helpers::MoreButton do
 
       let(:builder) { NeatPages::Helpers::MoreButton.new(pagination, request_mock) }
 
-      context "when generating the status" do
-        specify { builder.generate.should be_empty }
+      specify "when generating the status" do
+        expect(builder.generate).to be_empty
       end
     end
 
@@ -28,9 +28,9 @@ describe NeatPages::Helpers::MoreButton do
 
       let(:builder) { NeatPages::Helpers::MoreButton.new(pagination, request_mock) }
 
-      context "when generating button" do
-        specify { builder.generate('plus', 'fin').should eql '<div id="neat-pages-more-button" data-next-page="2" data-total-pages="4">' +
-          '<a href="http://test.dev?page=2">plus</a><div class="over">fin</div></div>' }
+      specify "when generating button" do
+        expect(builder.generate('plus', 'fin')).to eql '<div id="neat-pages-more-button" data-next-page="2" data-total-pages="4">' +
+          '<a href="http://test.dev?page=2">plus</a><div class="over">fin</div></div>'
       end
     end
   end

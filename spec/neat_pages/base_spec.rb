@@ -2,114 +2,114 @@ require 'spec_helper'
 
 describe NeatPages::Base do
   describe "#empty?" do
-    context "with a 20 items pagination" do
-      specify { NeatPages::Base.new(0, total_items: 20).should_not be_empty }
+    specify "with a 20 items pagination" do
+      expect(NeatPages::Base.new(0, total_items: 20)).not_to be_empty
     end
 
-    context "with a 0 item pagination" do
-      specify { NeatPages::Base.new(0).should be_empty }
+    specify "with a 0 item pagination" do
+      expect(NeatPages::Base.new(0)).to be_empty
     end
   end
 
   describe "#limit" do
-    context "with a 100 items pagination starting at 0 and having 10 items per page" do
-      specify { NeatPages::Base.new(0, per_page: 10, total_items: 100).limit.should eql 10 }
+    specify "with a 100 items pagination starting at 0 and having 10 items per page" do
+      expect(NeatPages::Base.new(0, per_page: 10, total_items: 100).limit).to eql 10
     end
   end
 
   describe "#next_page" do
-    context "with a 100 items pagination starting at 0 and having 10 items per page" do
-      specify { NeatPages::Base.new(0, per_page: 10, total_items: 100).next_page.should eql 2 }
+    specify "with a 100 items pagination starting at 0 and having 10 items per page" do
+      expect(NeatPages::Base.new(0, per_page: 10, total_items: 100).next_page).to eql 2
     end
 
-    context "with a 100 items pagination starting at page 3 and having 15 items per page" do
-      specify { NeatPages::Base.new(3, per_page: 15, total_items: 100).next_page.should eql 4 }
+    specify "with a 100 items pagination starting at page 3 and having 15 items per page" do
+      expect(NeatPages::Base.new(3, per_page: 15, total_items: 100).next_page).to eql 4
     end
 
-    context "with a 5 items pagination starting at 0 and having 10 items per page" do
-      specify { NeatPages::Base.new(0, per_page: 10, total_items: 5).next_page.should eql 1 }
+    specify "with a 5 items pagination starting at 0 and having 10 items per page" do
+      expect(NeatPages::Base.new(0, per_page: 10, total_items: 5).next_page).to eql 1
     end
   end
 
   describe "#next?" do
-    context "with a 100 items pagination starting at 0 and having 10 items per page" do
-      specify { NeatPages::Base.new(0, per_page: 10, total_items: 100).should be_next }
+    specify "with a 100 items pagination starting at 0 and having 10 items per page" do
+      expect(NeatPages::Base.new(0, per_page: 10, total_items: 100)).to be_next
     end
 
-    context "with a 5 items pagination starting at 0 and having 10 items per page" do
-      specify { NeatPages::Base.new(0, per_page: 10, total_items: 5).should_not be_next }
+    specify "with a 5 items pagination starting at 0 and having 10 items per page" do
+      expect(NeatPages::Base.new(0, per_page: 10, total_items: 5)).not_to be_next
     end
   end
 
   describe "#offset" do
-    context "with a 100 items pagination starting at page 1 and having 10 items per page" do
-      specify { NeatPages::Base.new(1, per_page: 10, total_items: 100).offset.should eql 0 }
+    specify "with a 100 items pagination starting at page 1 and having 10 items per page" do
+      expect(NeatPages::Base.new(1, per_page: 10, total_items: 100).offset).to eql 0
     end
 
-    context "with a 100 items pagination starting at page 4 and having 15 items per page" do
-      specify { NeatPages::Base.new(4, per_page: 15, total_items: 100).offset.should eql 45 }
+    specify "with a 100 items pagination starting at page 4 and having 15 items per page" do
+      expect(NeatPages::Base.new(4, per_page: 15, total_items: 100).offset).to eql 45
     end
 
-    context "with a 100 items pagination starting at page 999 and having 15 items per page" do
-      specify { NeatPages::Base.new(999, per_page: 15, total_items: 100).offset.should eql 101 }
+    specify "with a 100 items pagination starting at page 999 and having 15 items per page" do
+      expect(NeatPages::Base.new(999, per_page: 15, total_items: 100).offset).to eql 101
     end
   end
 
   describe "#out_of_bound?" do
-    context "with a 100 items pagination starting at page 1 and having 10 items per page" do
-      specify { NeatPages::Base.new(1, per_page: 10, total_items: 100).should_not be_out_of_bound }
+    specify "with a 100 items pagination starting at page 1 and having 10 items per page" do
+      expect(NeatPages::Base.new(1, per_page: 10, total_items: 100)).not_to be_out_of_bound
     end
 
-    context "with a 100 items pagination starting at page 11 and having 10 items per page" do
-      specify { NeatPages::Base.new(11, per_page: 10, total_items: 100).should be_out_of_bound }
+    specify "with a 100 items pagination starting at page 11 and having 10 items per page" do
+      expect(NeatPages::Base.new(11, per_page: 10, total_items: 100)).to be_out_of_bound
     end
   end
 
   describe "#paginated?" do
-    context "with a 20 items pagination starting at page 1 and having 10 items per page" do
-      specify { NeatPages::Base.new(1, per_page: 10, total_items: 20).should be_paginated }
+    specify "with a 20 items pagination starting at page 1 and having 10 items per page" do
+      expect(NeatPages::Base.new(1, per_page: 10, total_items: 20)).to be_paginated
     end
 
-    context "with a 5 items pagination starting at page 1 and having 10 items per page" do
-      specify { NeatPages::Base.new(1, per_page: 10, total_items: 5).should_not be_paginated }
+    specify "with a 5 items pagination starting at page 1 and having 10 items per page" do
+      expect(NeatPages::Base.new(1, per_page: 10, total_items: 5)).not_to be_paginated
     end
   end
 
   describe "#previous_page" do
-    context "with a 100 items pagination starting at page 5 and having 10 items per page" do
-      specify { NeatPages::Base.new(5, per_page: 10, total_items: 100).previous_page.should eql 4 }
+    specify "with a 100 items pagination starting at page 5 and having 10 items per page" do
+      expect(NeatPages::Base.new(5, per_page: 10, total_items: 100).previous_page).to eql 4
     end
 
-    context "with a 100 items pagination starting at page 3 and having 15 items per page" do
-      specify { NeatPages::Base.new(3, per_page: 15, total_items: 100).previous_page.should eql 2 }
+    specify "with a 100 items pagination starting at page 3 and having 15 items per page" do
+      expect(NeatPages::Base.new(3, per_page: 15, total_items: 100).previous_page).to eql 2
     end
 
-    context "with a 50 items pagination starting at 0 and having 10 items per page" do
-      specify { NeatPages::Base.new(0, per_page: 10, total_items: 50).previous_page.should eql 1 }
+    specify "with a 50 items pagination starting at 0 and having 10 items per page" do
+      expect(NeatPages::Base.new(0, per_page: 10, total_items: 50).previous_page).to eql 1
     end
   end
 
   describe "#previous" do
-    context "with a 100 items pagination starting at page 5 and having 10 items per page" do
-      specify { NeatPages::Base.new(5, per_page: 10, total_items: 100).should be_previous }
+    specify "with a 100 items pagination starting at page 5 and having 10 items per page" do
+      expect(NeatPages::Base.new(5, per_page: 10, total_items: 100)).to be_previous
     end
 
-    context "with a 50 items pagination starting at 0 and having 10 items per page" do
-      specify { NeatPages::Base.new(0, per_page: 10, total_items: 50).should_not be_previous }
+    specify "with a 50 items pagination starting at 0 and having 10 items per page" do
+      expect(NeatPages::Base.new(0, per_page: 10, total_items: 50)).not_to be_previous
     end
   end
 
   describe "#previous?" do
-    context "with a 100 items pagination starting at 0 and having 10 items per page" do
-      specify { NeatPages::Base.new(0, per_page: 10, total_items: 100).should_not be_previous }
+    specify "with a 100 items pagination starting at 0 and having 10 items per page" do
+      expect(NeatPages::Base.new(0, per_page: 10, total_items: 100)).not_to be_previous
     end
 
-    context "with a 100 items pagination starting at page 2 and having 10 items per page" do
-      specify { NeatPages::Base.new(2, per_page: 10, total_items: 100).should be_previous }
+    specify "with a 100 items pagination starting at page 2 and having 10 items per page" do
+      expect(NeatPages::Base.new(2, per_page: 10, total_items: 100)).to be_previous
     end
 
-    context "with a 5 items pagination starting at page 0 and having 10 items per page" do
-      specify { NeatPages::Base.new(0, per_page: 10, total_items: 5).should_not be_previous }
+    specify "with a 5 items pagination starting at page 0 and having 10 items per page" do
+      expect(NeatPages::Base.new(0, per_page: 10, total_items: 5)).not_to be_previous
     end
   end
 
@@ -132,19 +132,19 @@ describe NeatPages::Base do
       context "when changing the total items to 5" do
         before { pagination.set_total_items 5 }
 
-        specify { pagination.should be_out_of_bound }
-        specify { pagination.total_items.should eql 5 }
+        it { expect(pagination).to be_out_of_bound }
+        it { expect(pagination.total_items).to eql 5 }
       end
     end
   end
 
   describe "#total_pages" do
-    context "with a 100 items pagination and having 10 items per page" do
-      specify { NeatPages::Base.new(0, per_page: 10, total_items: 100).total_pages.should eql 10 }
+    specify "with a 100 items pagination and having 10 items per page" do
+      expect(NeatPages::Base.new(0, per_page: 10, total_items: 100).total_pages).to eql 10
     end
 
-    context "with a 0 items pagination and having 10 items per page" do
-      specify { NeatPages::Base.new(0, per_page: 10).total_pages.should eql 1 }
+    specify "with a 0 items pagination and having 10 items per page" do
+      expect(NeatPages::Base.new(0, per_page: 10).total_pages).to eql 1
     end
   end
 end

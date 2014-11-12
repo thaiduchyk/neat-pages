@@ -12,8 +12,8 @@ describe NeatPages::Helpers::Status do
 
       let(:builder) { NeatPages::Helpers::Status.new(pagination, request_mock) }
 
-      context "when generating the status" do
-        specify { builder.generate.should be_empty }
+      specify "when generating the status" do
+        expect(builder.generate).to be_empty
       end
     end
 
@@ -25,8 +25,8 @@ describe NeatPages::Helpers::Status do
 
       let(:builder) { NeatPages::Helpers::Status.new(pagination, request_mock) }
 
-      context "when generating the status" do
-        specify { builder.generate.should be_empty }
+      specify "when generating the status" do
+        expect(builder.generate).to be_empty
       end
     end
 
@@ -41,8 +41,8 @@ describe NeatPages::Helpers::Status do
 
       let(:builder) { NeatPages::Helpers::Status.new(pagination, request_mock) }
 
-      context "when generating the status" do
-        specify { builder.generate.should eql '<span data-neat-pages-control="status" id="neat-pages-status"><span class="from">21</span> to <span class="to">30</span>/<span class="total">100</span></span>' }
+      specify "when generating the status" do
+        expect(builder.generate).to eql '<span data-neat-pages-control="status" id="neat-pages-status"><span class="from">21</span> to <span class="to">30</span>/<span class="total">100</span></span>'
       end
     end
 
@@ -57,8 +57,8 @@ describe NeatPages::Helpers::Status do
 
       let(:builder) { NeatPages::Helpers::Status.new(pagination, request_mock) }
 
-      context "when generating the status" do
-        specify { builder.generate.should eql '<span data-neat-pages-control="status" id="neat-pages-status"><span class="from">21</span> to <span class="to">23</span>/<span class="total">23</span></span>' }
+      specify "when generating the status" do
+        expect(builder.generate).to eql '<span data-neat-pages-control="status" id="neat-pages-status"><span class="from">21</span> to <span class="to">23</span>/<span class="total">23</span></span>'
       end
     end
   end

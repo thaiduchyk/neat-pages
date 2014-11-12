@@ -35,7 +35,7 @@ describe NeatPages::Implants::MongoidCriteriaImplant do
         pagination.stub(:limit)
       end
 
-      specify { implant.paginate(pagination).should eql '' }
+      it { expect(implant.paginate(pagination)).to eql '' }
     end
 
   end

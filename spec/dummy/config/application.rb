@@ -13,6 +13,7 @@ require "neat-pages"
 
 module Dummy
   class Application < Rails::Application
+    config.i18n.enforce_available_locales = true
   end
 end
 

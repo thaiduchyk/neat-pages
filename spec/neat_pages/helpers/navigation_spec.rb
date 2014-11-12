@@ -12,10 +12,11 @@ describe NeatPages::Helpers::Navigation do
 
       let(:builder) { NeatPages::Helpers::Navigation.new(pagination, request_mock) }
 
-      context "when generating the navigation" do
-        specify { builder.generate.should be_empty }
+      specify "when generating the navigation" do
+        expect(builder.generate).to be_empty
       end
     end
+
     context "with a 40 items pagination starting at 20 and having 10 items per page" do
       before do
         pagination.stub(:paginated?).and_return(true)
@@ -32,8 +33,8 @@ describe NeatPages::Helpers::Navigation do
 
       let(:builder) { NeatPages::Helpers::Navigation.new(pagination, request_mock) }
 
-      context "when generating the navigation" do
-        specify { builder.generate.should eql '<ul class="standard" id="neat-pages-navigation" data-neat-pages-control=="navigation" data-per-page="10" data-total-items="40" data-total-pages="4"><li class="move previous "><a data-page="2" href="http://test.dev?page=2" class="previous">&laquo; Previous</a></li><li class="page"><a data-page="1" href="http://test.dev?page=1">1</a></li><li class="page"><a data-page="2" href="http://test.dev?page=2">2</a></li><li class="page selected"><a data-page="3" href="http://test.dev?page=3">3</a></li><li class="page"><a data-page="4" href="http://test.dev?page=4">4</a></li><li class="move next "><a data-page="4" href="http://test.dev?page=4" class="next">Next &raquo;</a></li></ul>' }
+      specify "when generating the navigation" do
+        expect(builder.generate).to eql '<ul class="standard" id="neat-pages-navigation" data-neat-pages-control=="navigation" data-per-page="10" data-total-items="40" data-total-pages="4"><li class="move previous "><a data-page="2" href="http://test.dev?page=2" class="previous">&laquo; Previous</a></li><li class="page"><a data-page="1" href="http://test.dev?page=1">1</a></li><li class="page"><a data-page="2" href="http://test.dev?page=2">2</a></li><li class="page selected"><a data-page="3" href="http://test.dev?page=3">3</a></li><li class="page"><a data-page="4" href="http://test.dev?page=4">4</a></li><li class="move next "><a data-page="4" href="http://test.dev?page=4" class="next">Next &raquo;</a></li></ul>'
       end
     end
 
@@ -53,8 +54,8 @@ describe NeatPages::Helpers::Navigation do
 
       let(:builder) { NeatPages::Helpers::Navigation.new(pagination, request_mock) }
 
-      context "when generating the navigation" do
-        specify { builder.generate.should eql '<ul class="standard" id="neat-pages-navigation" data-neat-pages-control=="navigation" data-per-page="10" data-total-items="40" data-total-pages="4"><li class="move previous "><a data-page="2" href="http://test.dev?page=2" class="previous">&laquo; Previous</a></li><li class="page"><a data-page="1" href="http://test.dev?page=1">1</a></li><li class="page"><a data-page="2" href="http://test.dev?page=2">2</a></li><li class="page selected"><a data-page="3" href="http://test.dev?page=3">3</a></li><li class="page"><a data-page="4" href="http://test.dev?page=4">4</a></li><li class="move next disabled"><a data-page="#" href="#" class="next">Next &raquo;</a></li></ul>' }
+      specify "when generating the navigation" do
+        expect(builder.generate).to eql '<ul class="standard" id="neat-pages-navigation" data-neat-pages-control=="navigation" data-per-page="10" data-total-items="40" data-total-pages="4"><li class="move previous "><a data-page="2" href="http://test.dev?page=2" class="previous">&laquo; Previous</a></li><li class="page"><a data-page="1" href="http://test.dev?page=1">1</a></li><li class="page"><a data-page="2" href="http://test.dev?page=2">2</a></li><li class="page selected"><a data-page="3" href="http://test.dev?page=3">3</a></li><li class="page"><a data-page="4" href="http://test.dev?page=4">4</a></li><li class="move next disabled"><a data-page="#" href="#" class="next">Next &raquo;</a></li></ul>'
       end
     end
 
@@ -74,8 +75,8 @@ describe NeatPages::Helpers::Navigation do
 
       let(:builder) { NeatPages::Helpers::Navigation.new(pagination, request_mock) }
 
-      context "when generating the navigation" do
-        specify { builder.generate.should eql '<ul class="standard" id="neat-pages-navigation" data-neat-pages-control=="navigation" data-per-page="10" data-total-items="200" data-total-pages="20">'+
+      specify "when generating the navigation" do
+        expect(builder.generate).to eql '<ul class="standard" id="neat-pages-navigation" data-neat-pages-control=="navigation" data-per-page="10" data-total-items="200" data-total-pages="20">'+
           '<li class="move previous "><a data-page="11" href="http://test.dev?page=11" class="previous">&laquo; Previous</a></li>'+
           '<li class="page" style="display:none"><a data-page="1" href="http://test.dev?page=1">1</a></li>'+
           '<li class="page" style="display:none"><a data-page="2" href="http://test.dev?page=2">2</a></li>'+
@@ -97,7 +98,7 @@ describe NeatPages::Helpers::Navigation do
           '<li class="page" style="display:none"><a data-page="18" href="http://test.dev?page=18">18</a></li>'+
           '<li class="page" style="display:none"><a data-page="19" href="http://test.dev?page=19">19</a></li>'+
           '<li class="page" style="display:none"><a data-page="20" href="http://test.dev?page=20">20</a></li>'+
-          '<li class="move next "><a data-page="13" href="http://test.dev?page=13" class="next">Next &raquo;</a></li></ul>' }
+          '<li class="move next "><a data-page="13" href="http://test.dev?page=13" class="next">Next &raquo;</a></li></ul>'
       end
     end
 
