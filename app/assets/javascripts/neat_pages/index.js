@@ -1,3 +1,4 @@
 //= require jquery.hashchange.min
-//= require ./base
+//= require ./navigation
+//= require ./more_button
 

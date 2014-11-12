@@ -1,9 +1,9 @@
 Gem::Specification.new do |gem|
   gem.name        = "neat-pages"
-  gem.description = "A simple pagination API to paginate Mongoid Models."
-  gem.summary     = "A simple pagination API to paginate Mongoid Models."
-  gem.homepage    = "https://github.com/demarque/neat-pages"
-  gem.version     = "1.0.2"
+  gem.description = "A simple pagination API to paginate ActiveRecord and Mongoid Models."
+  gem.summary     = "A simple pagination API to paginate ActiveRecord and Mongoid Models."
+  gem.homepage    = "https://github.com/alchimikweb/neat-pages"
+  gem.version     = "1.0.4"
   gem.licenses    = ["MIT"]
 
   gem.authors     = ["Sebastien Rosa"]
@@ -19,5 +19,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "rspec-rails"
   gem.add_development_dependency "simplecov"
   gem.add_development_dependency "simplecov-rcov-text"
-  gem.add_development_dependency "coveralls"
+  #gem.add_development_dependency "coveralls"
 end

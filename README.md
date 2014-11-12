@@ -124,6 +124,10 @@ you can pass the parameter ``` wrapper: 'tbody' ```. So the call would look like
   <%= neat_pages_navigation %>
 ```
 
+``` neat_pages_more_button ```
+
+Generate a more button that will lazy load the records instead of showing a navigation like (< 1 2 3 4 >).
+
 ``` neat_pages_navigation ```
 
 Generate a page navigation. (ex: < 1 2 3 4 >)
@@ -136,6 +140,7 @@ Put this line in the head tag to generate the link relation tags
 
 Generate the current state of the pagination (ex: 30 to 40 / 200)
 
+
 ### Javascript Events
 
 #### `neat_pages:update`
@@ -144,6 +149,11 @@ Triggered on `'body'` whenever a page has changed, from cache or from server.
 The event data is an object literal which holds those fields:
 
 `noPage` The current page number
+
+#### `neat_pages:over`
+
+Triggered on `'body'` when there's no more record to load. Use with the more button.
+
 
 Locales
 -------
@@ -155,6 +165,8 @@ If you want to translate the text in the pagination helpers, just add the follow
     neat_pages:
       next_page: Page suivante
       previous_page: Page précédente
+      more: Plus de produits
+      over: Aucun autre produit de disponible
 ```
 
 

@@ -1,4 +1,4 @@
-class NeatPage
+class NeatPagesNavigation
   constructor: () ->
     # AJAX pagination only for IE7 and up
     if navigator.appVersion.indexOf("MSIE 7.") == -1
@@ -88,7 +88,6 @@ class NeatPage
         $('body').trigger('neat_pages:update', {noPage: noPage})
       )
 
-
   moveIsDisabled: (direction) -> $('#neat-pages-navigation li.' + direction).hasClass('disabled')
 
   nextPage: () -> @updateHash @currentPageNumber() + 1 if not @moveIsDisabled 'next'
@@ -150,4 +149,4 @@ class NeatPage
     $('#neat-pages-status').find('span.to').html(to)
 
 
-$ -> new NeatPage if $('#neat-pages-navigation').length > 0
+$ -> new NeatPagesNavigation if $('#neat-pages-navigation').length

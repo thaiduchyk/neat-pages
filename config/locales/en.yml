@@ -2,3 +2,5 @@ en:
   neat_pages:
     next_page: Next
     previous_page: Previous
+    more: More items
+    over: "No more items"

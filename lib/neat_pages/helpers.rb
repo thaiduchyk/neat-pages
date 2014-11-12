@@ -8,6 +8,10 @@ module NeatPages::Helpers
     ("<#{options[:wrapper]} id=\"neat-pages-ajax-wrapper\" class=\"first-load\">" + render(partial_path, options) + "</#{options[:wrapper]}>").html_safe
   end
 
+  def neat_pages_more_button(label=nil, message_over=nil)
+    NeatPages::Helpers::MoreButton.new(pagination, request).generate(label, message_over)
+  end
+
   # DEPRECATED : The options parameter is deprecated. I left it here for backward compatibility. (2013-11-20)
   def neat_pages_navigation(options={})
     NeatPages::Helpers::Navigation.new(pagination, request).generate
@@ -25,6 +29,7 @@ module NeatPages::Helpers
 end
 
 require 'neat_pages/helpers/builder'
+require 'neat_pages/helpers/more_button'
 require 'neat_pages/helpers/navigation'
 require 'neat_pages/helpers/relation'
 require 'neat_pages/helpers/status'

@@ -18,6 +18,24 @@ describe NeatPages::Helpers do
     end
   end
 
+  describe "#neat_pages_more_button" do
+    before do
+      views.stub(:request).and_return(request_mock(host: 'testview.dev'))
+
+      pagination.stub(:paginated?).and_return(true)
+      pagination.stub(:next?).and_return(true)
+      pagination.stub(:next_page).and_return(2)
+      pagination.stub(:total_pages).and_return(4)
+
+      views.stub(:pagination).and_return(pagination)
+    end
+
+    context "when rendering the more button" do
+      specify { views.neat_pages_more_button.should eql '<div id="neat-pages-more-button" data-next-page="2" data-total-pages="4">' +
+        '<a href="http://testview.dev?page=2">More items</a><div class="over">No more items</div></div>' }
+    end
+  end
+
   describe "#neat_pages_navigation" do
     before do
       views.stub(:request).and_return(request_mock(host: 'testview.dev'))

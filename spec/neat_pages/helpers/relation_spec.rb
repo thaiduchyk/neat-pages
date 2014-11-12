@@ -7,16 +7,6 @@ describe NeatPages::Helpers::Relation do
 
     let(:pagination) { double() }
 
-    context "with an empty pagination" do
-      before { pagination.stub(:empty?).and_return(true) }
-
-      let(:builder) { NeatPages::Helpers::Status.new(pagination, request_mock) }
-
-      context "when generating the status" do
-        specify { builder.generate.should be_empty }
-      end
-    end
-
     context "with pagination at 1 of 4" do
       before do
         pagination.stub(:paginated?).and_return(true)
