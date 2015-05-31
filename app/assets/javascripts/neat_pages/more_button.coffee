@@ -1,11 +1,17 @@
 class NeatPagesMoreButton
   constructor: ->
-    # AJAX pagination only for IE7 and up
-    if navigator.appVersion.indexOf("MSIE 7.") == -1
-      if $('#neat-pages-ajax-wrapper').length != 0
-        @cachePage()
+    $(document).on "click", "#neat-pages-more-button a", (e) =>
+      if @cache
+        @moreItems $(e.target)
+      else
+        $.get(@buildURL(), (data) =>
+          @cache = data
+          @moreItems $(e.target)
+        )
 
-        $('#neat-pages-more-button a').click (e) => @moreItems($(e.target)); return false
+      return false
+
+    if $('#neat-pages-ajax-wrapper').length != 0 then @cachePage()
 
 
   buildURL: () ->
@@ -59,4 +65,4 @@ class NeatPagesMoreButton
     if not @itemsLeft() then $('body').trigger('neat_pages:over')
 
 
-$ -> new NeatPagesMoreButton if $('#neat-pages-more-button').length > 0
+$ -> new NeatPagesMoreButton

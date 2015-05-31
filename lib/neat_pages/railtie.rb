@@ -9,7 +9,7 @@ module NeatPages
         require 'neat_pages/helpers'
       end
 
-      Mime::Type.register "text/html", :neatpage if not Mime::Type.lookup_by_extension :neatpage
+      Mime::Type.register "text/neatpage", :neatpage if not Mime::Type.lookup_by_extension :neatpage
     end
   end
 

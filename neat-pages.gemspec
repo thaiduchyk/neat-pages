@@ -3,7 +3,7 @@ Gem::Specification.new do |gem|
   gem.description = "A simple pagination API to paginate ActiveRecord and Mongoid Models."
   gem.summary     = "A simple pagination API to paginate ActiveRecord and Mongoid Models."
   gem.homepage    = "https://github.com/alchimikweb/neat-pages"
-  gem.version     = "1.0.4"
+  gem.version     = "1.0.5"
   gem.licenses    = ["MIT"]
 
   gem.authors     = ["Sebastien Rosa"]
