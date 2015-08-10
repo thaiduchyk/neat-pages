@@ -11,7 +11,8 @@ class NeatPagesMoreButton
 
       return false
 
-    if $('#neat-pages-ajax-wrapper').length != 0 then @cachePage()
+    if $('#neat-pages-ajax-wrapper').length and $('#neat-pages-more-button').length
+      @cachePage()
 
 
   buildURL: () ->
