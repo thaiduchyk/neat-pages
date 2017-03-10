@@ -4,11 +4,11 @@ require 'simplecov'
 require 'simplecov-rcov-text'
 require 'coveralls'
 
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
   SimpleCov::Formatter::HTMLFormatter,
   SimpleCov::Formatter::RcovTextFormatter,
   Coveralls::SimpleCov::Formatter
-]
+])
 
 SimpleCov.start do
   add_filter "spec/dummy"
